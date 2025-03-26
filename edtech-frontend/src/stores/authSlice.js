@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/auth";
+const API_URL = "https://edtechbackend-mu.vercel.app/api/auth";
 
 // Get token from localStorage on initialization
 const token = localStorage.getItem("token");
@@ -10,7 +10,7 @@ const token = localStorage.getItem("token");
 export const registerUser = createAsyncThunk("auth/register", async (userData, { rejectWithValue }) => {
     try {
         const response = await axios.post(`${API_URL}/register`, userData);
-        localStorage.setItem("token", response.data.token);
+        
         return response.data;
     } catch (error) {
         return rejectWithValue(
