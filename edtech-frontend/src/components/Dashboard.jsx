@@ -154,6 +154,7 @@ const Dashboard = () => {
     </div>
   );
   const navigate= useNavigate()
+  const [slice, setSlice] = useState(4)
   return (
     <div className="min-h-screen bg-gray-50 flex">
       {/* Sidebar Navigation */}
@@ -243,13 +244,14 @@ const Dashboard = () => {
             <h2 className="text-3xl font-bold text-gray-900">
               My Enrolled Courses
             </h2>
-            <button className="text-indigo-600 hover:underline">
-              View All Courses
+            <button onClick={() => {if(slice==mockCourses.length){setSlice(4)}else{setSlice(mockCourses.length)}}} className="text-indigo-600 hover:underline">
+              {slice==5? "View Less Courses":"View All Courses"}
             </button>
           </div>
           
           <div className="grid md:grid-cols-4 ">
-            {mockCourses.map(renderCourseCard)}
+            {searchQuery?(mockCourses.filter(course=>course.title.toLowerCase().includes(searchQuery.toLowerCase())).length!=0? mockCourses.filter(course=>course.title.toLowerCase().includes(searchQuery.toLowerCase())).map(renderCourseCard):"no course found"): mockCourses.slice(0,slice).map(renderCourseCard)}
+
           </div>
         </section>
 
