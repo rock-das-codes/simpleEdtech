@@ -49,6 +49,26 @@ const mockCourses = [
     level: "Expert",
     image: "/api/placeholder/400/250",
     color: "from-purple-500 to-violet-600"
+  },
+   {
+    id: 4,
+    title: "AI & Machine Learning",
+    instructor: "Dr. Emily Rodriguez",
+    progress: 85,
+    category: "Artificial Intelligence",
+    level: "Expert",
+    image: "/api/placeholder/400/250",
+    color: "from-purple-500 to-violet-600"
+  },
+   {
+    id: 3,
+    title: "AI & Machine Learning",
+    instructor: "Dr. Emily Rodriguez",
+    progress: 85,
+    category: "Artificial Intelligence",
+    level: "Expert",
+    image: "/api/placeholder/400/250",
+    color: "from-purple-500 to-violet-600"
   }
 ];
 
@@ -87,32 +107,34 @@ const Dashboard = () => {
     <div 
       key={course.id} 
       className={`
-        bg-gradient-to-br ${course.color} 
-        text-white 
+    
+        
         rounded-2xl 
         overflow-hidden 
         shadow-2xl 
         transform 
         transition-all 
-        hover:scale-105 
+        scale-85
         hover:shadow-2xl
       `}
     >
-      <div className="p-6">
+        <img className='max-w-full h-48 object-cover' src="https://picsum.photos/200" width={500} height={300} alt="Course" />
+      <div className="p-6 ">
+      
         <div className="flex justify-between items-center mb-4">
-          <span className="text-sm bg-white/20 px-3 py-1 rounded-full">
+          <span className="text-sm  px-3 py-1 rounded-full">
             {course.level}
           </span>
           <span className="text-sm">{course.category}</span>
         </div>
         
-        <h3 className="text-2xl font-bold mb-2">{course.title}</h3>
-        <p className="text-white/80 mb-4">Instructor: {course.instructor}</p>
+        <h3 className="text-xl font-bold mb-2">{course.title}</h3>
+        <p className=" mb-4">Instructor: {course.instructor}</p>
         
         <div className="flex items-center space-x-3 mb-4">
-          <div className="w-full bg-white/30 rounded-full h-2.5">
+          <div className="w-full rounded-full h-2.5">
             <div 
-              className="bg-white h-2.5 rounded-full" 
+              className="bg-green-400 h-2.5 rounded-full" 
               style={{width: `${course.progress}%`}}
             ></div>
           </div>
@@ -120,11 +142,11 @@ const Dashboard = () => {
         </div>
         
         <div className="flex justify-between items-center">
-          <button className="bg-white/20 hover:bg-white/30 px-4 py-2 rounded-full flex items-center">
+          <button className=" px-4 py-2 rounded-full flex items-center">
             <PlayCircle className="mr-2" size={20} /> Continue
           </button>
           <CheckCircle2 
-            className={course.progress === 100 ? 'text-white' : 'text-white/50'} 
+            className={course.progress === 100 ? 'text-red' : 'text-red/50'} 
             size={24} 
           />
         </div>
@@ -226,7 +248,7 @@ const Dashboard = () => {
             </button>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-4 ">
             {mockCourses.map(renderCourseCard)}
           </div>
         </section>
