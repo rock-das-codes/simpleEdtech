@@ -16,7 +16,8 @@ import {
   Search,
   BarChart2,
   PlayCircle,
-  CheckCircle2
+  CheckCircle2,
+   BookOpen, 
 } from 'lucide-react';
 
 const mockCourses = [
@@ -89,12 +90,12 @@ const Dashboard = () => {
       tab: 'explore' ,
       address:"/explore"
     },
-    { 
-      icon: <Book />, 
-      label: 'My Courses', 
-      tab: 'courses' ,
-      address:"/"
-    },
+    // { 
+    //   icon: <Book />, 
+    //   label: 'My Courses', 
+    //   tab: 'courses' ,
+    //   address:"/"
+    // },
     { 
       icon: <TrendingUp />, 
       label: 'Progress', 
@@ -107,32 +108,30 @@ const Dashboard = () => {
     <div 
       key={course.id} 
       className={`
-    
-        
-        rounded-2xl 
-        overflow-hidden 
-        shadow-2xl 
-        transform 
-        transition-all 
-        scale-85
-        hover:shadow-2xl
-      `}
+      rounded-2xl 
+      overflow-hidden 
+      shadow-2xl 
+      transform 
+      transition-all 
+      scale-85
+      h-[400px] flex flex-col
+      hover:shadow-2xl
+    `}
     >
-        <img className='max-w-full h-48 object-cover' src="https://picsum.photos/200" width={500} height={300} alt="Course" />
-      <div className="p-6 ">
-      
-        <div className="flex justify-between items-center mb-4">
-          <span className="text-sm  px-3 py-1 rounded-full">
+      <img className='max-w-full h-32 object-cover' src="https://picsum.photos/200" width={500} height={300} alt="Course" />
+      <div className="p-6 flex flex-col flex-1">
+        <div className="flex justify-between items-center mb-2">
+          <span className="text-sm px-3 py-1 rounded-full">
             {course.level}
           </span>
           <span className="text-sm">{course.category}</span>
         </div>
         
-        <h3 className="text-xl font-bold mb-2">{course.title}</h3>
-        <p className=" mb-4">Instructor: {course.instructor}</p>
+        <h3 className="text-xl font-bold mb-2 line-clamp-2">{course.title}</h3>
+        <p className="mb-2">Instructor: {course.instructor}</p>
         
-        <div className="flex items-center space-x-3 mb-4">
-          <div className="w-full rounded-full h-2.5">
+        <div className="flex items-center space-x-3 mb-2">
+          <div className="w-full rounded-full h-2.5 bg-gray-200">
             <div 
               className="bg-green-400 h-2.5 rounded-full" 
               style={{width: `${course.progress}%`}}
@@ -141,8 +140,8 @@ const Dashboard = () => {
           <span>{course.progress}%</span>
         </div>
         
-        <div className="flex justify-between items-center">
-          <button className=" px-4 py-2 rounded-full flex items-center">
+        <div className="flex justify-between items-center mt-auto">
+          <button className="px-4 py-2 rounded-full flex items-center bg-green-500 text-gray-900 hover:bg-green-300">
             <PlayCircle className="mr-2" size={20} /> Continue
           </button>
           <CheckCircle2 
@@ -250,7 +249,13 @@ const Dashboard = () => {
           </div>
           
           <div className="grid md:grid-cols-4 ">
-            {searchQuery?(mockCourses.filter(course=>course.title.toLowerCase().includes(searchQuery.toLowerCase())).length!=0? mockCourses.filter(course=>course.title.toLowerCase().includes(searchQuery.toLowerCase())).map(renderCourseCard):"no course found"): mockCourses.slice(0,slice).map(renderCourseCard)}
+            {searchQuery?(mockCourses.filter(course=>course.title.toLowerCase().includes(searchQuery.toLowerCase())).length!=0? mockCourses.filter(course=>course.title.toLowerCase().includes(searchQuery.toLowerCase())).map(renderCourseCard):<div className="col-span-full text-center py-12">
+              <BookOpen size={64} className="mx-auto text-gray-300 mb-4" />
+              <h2 className="text-2xl font-bold text-gray-600">
+                No courses found
+              </h2>
+              <p className="text-gray-500">Try adjusting your search or filters</p>
+            </div>): mockCourses.slice(0,slice).map(renderCourseCard)}
 
           </div>
         </section>

@@ -115,18 +115,18 @@ const ExploreCourses = () => {
     <div 
       key={course.id} 
       className={`
-        bg-gradient-to-br ${course.color} 
-        text-white 
+        scale-80
         rounded-2xl 
         overflow-hidden 
         shadow-2xl 
         transform 
         transition-all 
-        hover:scale-105 
+        h-[600px] flex flex-col
         hover:shadow-2xl
       `}
     >
-      <div className="p-6">
+      <img className='max-w-full h-48 object-cover' src="https://picsum.photos/200" width={500} height={300} alt="Course" />
+      <div className="p-6 flex flex-col flex-1">
         <div className="flex justify-between items-center mb-4">
           <span className="text-sm bg-white/20 px-3 py-1 rounded-full">
             {course.level}
@@ -137,7 +137,7 @@ const ExploreCourses = () => {
           </div>
         </div>
         
-        <h3 className="text-2xl font-bold mb-2">{course.title}</h3>
+        <h3 className="text-2xl font-bold mb-2 line-clamp-2">{course.title}</h3>
         <p className="text-white/80 mb-4">By {course.instructor}</p>
         
         <div className="flex justify-between items-center mb-4">
@@ -159,7 +159,7 @@ const ExploreCourses = () => {
           ))}
         </div>
         
-        <button className="w-full bg-white text-gray-900 py-3 rounded-full hover:bg-gray-100 flex items-center justify-center">
+        <button className="w-full bg-green-500 text-gray-900 py-3 rounded-full hover:bg-green-300 flex items-center justify-center mt-auto">
           <PlayCircle className="mr-2" /> Enroll Now
         </button>
       </div>
@@ -276,7 +276,7 @@ const ExploreCourses = () => {
         )}
 
         {/* Course Grid */}
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-3 ">
           {filteredCourses.length > 0 ? (
             filteredCourses.map(renderCourseCard)
           ) : (
