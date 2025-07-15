@@ -44,7 +44,8 @@ const ProgressPage = () => {
   ];
 
   return (
-    <div className="min-h-screen  bg-red-500 flex justify-center items-center bg-gray-100 p-6">
+    <div className='w-full flex justify-center items-center '>
+    <div className="min-h-screen   bg-gray-100 p-6">
       <div className="container mx-auto">
         <h1 className="text-3xl font-bold text-gray-800 mb-6">
           My Learning Progress
@@ -122,7 +123,7 @@ const ProgressPage = () => {
           </div>
         </div>
       </div>
-    </div>
+    </div></div>
   );
 };
 

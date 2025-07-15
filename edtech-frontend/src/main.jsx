@@ -9,6 +9,7 @@ import { Provider } from 'react-redux'
 import Login from "./components/Login.jsx";
 import Signup from "./components/Signup.jsx";
 import Dashboard from "./components/Dashboard.jsx";
+import NotFound from './pages/NotFound.jsx';
 import ProtectedRoute from './components/Restricted.jsx';
 import ExploreCourses from './components/Explore.jsx'
 createRoot(document.getElementById('root')).render(
@@ -22,7 +23,8 @@ createRoot(document.getElementById('root')).render(
         {/* <Route element={<ProtectedRoute />}> */}
                     <Route path="/dashboard" element={<Dashboard />} />
                 {/* </Route> */}
-         <Route path="/explore" element={<ExploreCourses/>}/>    
+         <Route path="/explore" element={<ExploreCourses/>}/>   
+         <Route path="*" element={<NotFound />} />  
     </Routes>
     </BrowserRouter>
     </Provider>
