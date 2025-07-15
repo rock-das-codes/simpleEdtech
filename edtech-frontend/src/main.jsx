@@ -10,6 +10,7 @@ import Login from "./components/Login.jsx";
 import Signup from "./components/Signup.jsx";
 import Dashboard from "./components/Dashboard.jsx";
 import NotFound from './pages/NotFound.jsx';
+import Profile from "./pages/Profile.jsx"
 import ProtectedRoute from './components/Restricted.jsx';
 import ExploreCourses from './components/Explore.jsx'
 createRoot(document.getElementById('root')).render(
@@ -22,6 +23,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/signup" element={<Signup />} />
         {/* <Route element={<ProtectedRoute />}> */}
                     <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path='/profile' element={<Profile/>}/>
                 {/* </Route> */}
          <Route path="/explore" element={<ExploreCourses/>}/>   
          <Route path="*" element={<NotFound />} />  

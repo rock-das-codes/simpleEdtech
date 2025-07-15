@@ -33,14 +33,14 @@ const EdTechLandingPage = () => {
       {/* Animated Navigation */}
       <nav className="fixed w-full z-50 top-0 bg-white/80 backdrop-blur-md shadow-md">
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-          <div className="flex items-center space-x-4 transform transition-transform hover:scale-105">
-            <GraduationCap className="text-indigo-600" size={40} />
-            <span className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">
+          <div className="flex items-center space-x-4 transform transition-transform ">
+            <GraduationCap className="text-black" size={40} />
+            <span className="text-3xl font-black text-transparent bg-clip-text bg-black">
               MasterMind
             </span>
           </div>
           <div className="flex items-center space-x-4">
-            <button className="flex items-center bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-3 rounded-full hover:shadow-xl transition-all transform hover:scale-105 hover:-translate-y-1">
+            <button className="flex items-center bg-black text-white px-6 py-3 rounded-full hover:shadow-xl transition-all transform ">
               <LogIn className="mr-2" size={24} />
               Launch Learning
             </button>
@@ -52,10 +52,10 @@ const EdTechLandingPage = () => {
       <main className="container mx-auto px-6 pt-24 relative">
         <div className="grid md:grid-cols-2 items-center gap-12">
           <div className="space-y-8 relative z-10">
-            <div className="absolute -left-12 -top-12 w-32 h-32 bg-purple-300 rounded-full mix-blend-multiply filter blur-2xl animate-blob"></div>
+          
             <h1 className="text-6xl font-black text-gray-900 leading-tight relative">
               Transform Your 
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">
+              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-700">
                 Learning Journey
               </span>
             </h1>
@@ -63,10 +63,11 @@ const EdTechLandingPage = () => {
               Unlock your potential with cutting-edge courses, expert mentors, and adaptive learning technologies.
             </p>
             <div className="flex space-x-4">
-              <button onClick={()=>navigate("/signup")} className="flex items-center bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-8 py-4 rounded-full hover:shadow-xl transition-all transform hover:scale-105 hover:-translate-y-1">
+              <button onClick={()=>navigate("/signup")} className="flex items-center bg-black text-white px-8 py-4 rounded-full hover:shadow-xl transition-all ">
                 Start Your Journey <ChevronRight className="ml-2" />
               </button>
-              <button className="border-2 border-indigo-600 text-indigo-600 px-8 py-4 rounded-full hover:bg-indigo-50 transition-colors flex items-center">
+              <button className="border-2 border-indigo-600 text-indigo-600 px-8 py-4 rounded-full hover:bg-indigo-50 transition-colors flex items-center" onClick={() => navigate("/explore")}>
+
                 Explore Courses
               </button>
             </div>
@@ -76,15 +77,7 @@ const EdTechLandingPage = () => {
           <div className="hidden md:flex justify-center relative">
             <div className="absolute inset-0 bg-gradient-to-r from-indigo-100 to-purple-100 rounded-full -z-10 animate-pulse"></div>
             <div className="relative">
-              <Laptop size={500} className="text-indigo-600 drop-shadow-2xl transform hover:scale-105 transition-transform" />
-              <div className="absolute top-0 -right-12 bg-white shadow-lg p-4 rounded-xl flex items-center space-x-3 animate-bounce">
-                <Medal className="text-yellow-500" />
-                <span className="font-bold text-gray-800">Top Rated Courses</span>
-              </div>
-              <div className="absolute bottom-0 -left-12 bg-white shadow-lg p-4 rounded-xl flex items-center space-x-3 animate-bounce delay-500">
-                <Check className="text-green-500" />
-                <span className="font-bold text-gray-800">Certified Programs</span>
-              </div>
+              <img src="/Google_AI_Studio_2025-07-15T13_36_45.754Z-removebg-preview.png" alt="3D Illustration" className="w-full max-w-md" />
             </div>
           </div>
         </div>
@@ -94,7 +87,7 @@ const EdTechLandingPage = () => {
       <section className="container mx-auto px-6 py-16">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-black text-gray-900 mb-4">
-            Why <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">MasterMind?</span>
+            Why <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-700">MasterMind?</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Experience learning like never before with our innovative platform.
@@ -110,7 +103,7 @@ const EdTechLandingPage = () => {
                 ${feature.background} 
                 p-6 rounded-xl shadow-lg cursor-pointer 
                 transform transition-all duration-300
-                ${activeFeature === index ? 'scale-105 ring-4 ring-indigo-300' : 'hover:scale-105'}
+                }
               `}
             >
               {feature.icon}
@@ -122,7 +115,7 @@ const EdTechLandingPage = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gradient-to-r from-indigo-900 to-purple-900 text-white py-12">
+      <footer className="bg-black text-white py-12">
         <div className="container mx-auto px-6 text-center">
           <p className="text-white/80">© 2024 MasterMind Learning. All rights reserved.</p>
         </div>
