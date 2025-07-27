@@ -1,15 +1,17 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose"
 
+const Lessons = new mongoose.Schema({
+  title:{type:String,required:true},
+  video:String,
+  content:String
+},{_id:false})
 const CourseSchema = new mongoose.Schema({
   title: { type: String, required: true },
   description: { type: String, required: true },
   instructor: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-  students: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }], // Enrolled students
-  lessons: [{ 
-    title: String, 
-    content: String, 
-    videoUrl: String 
-  }]
+  students: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }], 
+  introductoryVideoUrl: String,
+  lessons: [Lessons]
 }, { timestamps: true });
 
-module.exports = mongoose.model("Course", CourseSchema);
+export const Course = mongoose.model('course',CourseSchema)

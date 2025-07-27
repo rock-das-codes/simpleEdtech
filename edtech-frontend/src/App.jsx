@@ -40,7 +40,7 @@ const EdTechLandingPage = () => {
             </span>
           </div>
           <div className="flex items-center space-x-4">
-            <button className="flex items-center bg-black text-white px-6 py-3 rounded-full hover:shadow-xl transition-all transform ">
+            <button className="flex items-center bg-black text-white px-6 py-3 rounded-full hover:shadow-xl transition-all transform " onClick={() => navigate("/signup")}>
               <LogIn className="mr-2" size={24} />
               Launch Learning
             </button>
