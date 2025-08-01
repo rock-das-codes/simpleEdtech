@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Enrollment = require("../models/Enrollment");
 const Course = require("../models/Course"); // ✅ Ensure Course model is imported
-const { authMiddleware } = require("./../midddleware/authmiddleware"); // ✅ Fix middleware path
+const { authMiddleware } = require("../middleware/authmiddleware"); // ✅ Fix middleware path
 
 // 🔹 Enroll in a course
 router.post("/enroll", authMiddleware, async (req, res) => {

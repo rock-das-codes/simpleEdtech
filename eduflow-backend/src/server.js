@@ -1,10 +1,10 @@
-const express = require("express");
-const dotenv = require("dotenv");
-const cors = require("cors");
-const connectDB = require("./config/db");
-const authRoutes = require("./routes/authRoute");
-const courseRoutes = require("./routes/courseRoutes");
-const enrollmentRoutes = require("./routes/enrollment");
+import express from "express";
+import dotenv from "dotenv";
+import cors from "cors";
+import connectDB from "./config/db.js";
+import router from "./routes/authRoute.js";
+// import courseRoutes from "./routes/courseRoutes.js";
+// import enrollmentRoutes from "./routes/enrollment.js";
 
 dotenv.config();
 connectDB();
@@ -13,7 +13,7 @@ const app = express();
 
 // 🔹 CORS Middleware (Allows credentials for auth)
 app.use(cors({
-    origin: process.env.CORS_ORIGIN,// Replace with frontend URL
+    origin: process.env.CORS_ORIGIN, // Replace with frontend URL
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true  // ✅ Allows cookies & tokens
@@ -35,15 +35,15 @@ app.get("/", (req, res) => {
 });
 
 // 🔹 Register API Routes
-app.use("/api/auth", authRoutes);
-app.use("/api/courses", courseRoutes);
+app.use("/api/users", router);
+// app.use("/api/courses", courseRoutes);
 
 // 🔹 Global Error Handler Middleware
 app.use((err, req, res, next) => {
     console.error("Server Error:", err.message);
     res.status(500).json({ message: "Internal Server Error" });
 });
-app.use("/api/enrollments", enrollmentRoutes); 
+// app.use("/api/enrollments", enrollmentRoutes); 
 
 // 🔹 Start Server
 const PORT = process.env.PORT || 5000;
