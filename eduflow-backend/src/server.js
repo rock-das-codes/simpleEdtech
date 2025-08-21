@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 import connectDB from "./config/db.js";
 import router from "./routes/authRoute.js";
 // import courseRoutes from "./routes/courseRoutes.js";
@@ -19,8 +20,9 @@ app.use(cors({
     credentials: true  // ✅ Allows cookies & tokens
 }));
 
-// 🔹 Middleware to parse JSON
+// 🔹 Middleware to parse JSON and cookies
 app.use(express.json());
+app.use(cookieParser());
 
 // 🔹 Logger Middleware (Now placed before routes)
 app.use((req, res, next) => {

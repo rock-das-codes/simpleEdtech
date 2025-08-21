@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema({
     }
 },{timestamps:true})
 
-userSchema.pre("save",async function(){
+userSchema.pre("save",async function(next){
     if(this.isModified("password")){
         this.password = await bcrypt.hash(this.password,10)
     }
@@ -41,7 +41,7 @@ userSchema.methods.isPasswordMatching = async function(password){
 userSchema.methods.generateRefreshToken =  function(){
     return jwt.sign(
         {_id:this._id},
-        process.env.REFRESH_TOKEN,
+        process.env.REFRESH_TOKEN_SECRET,
         {expiresIn:process.env.REFRESH_TOKEN_EXPIRY}
     )
 }
@@ -51,7 +51,7 @@ userSchema.methods.generateAccessToken =  function(){
             email:this.email,
             username:this.username
         },
-        process.env.ACCESS_TOKEN,
+        process.env.ACCESS_TOKEN_SECRET,
         {expiresIn:process.env.ACCESS_TOKEN_EXPIRY}
         
     )

@@ -1,5 +1,6 @@
 import { User } from "../models/user.js";
 import bcrypt from "bcryptjs"
+import jwt from "jsonwebtoken"
 import {asyncHandler} from "./../utils/asynchandler.js"
 import {ApiResponse} from "./../utils/ApiResponse.js"
 import {ApiError} from "./../utils/ApiError.js"
@@ -7,20 +8,20 @@ import {ApiError} from "./../utils/ApiError.js"
 const registerUser = asyncHandler(async (req,res)=>{
     const {email,password,username} = req.body
     if(!email||!password||!username){
-        throw new ApiError(404,"all fields are required")
+        throw new ApiError("all fields are required")
     }
     const user =await User.findOne(
       {  $or:[{username},{email}]}
     )
     if(user){
-        throw new ApiError(400,"user already exists")
+        throw new ApiError("user already exists")
     }
     const newUser = await User.create({
         username,
         password,
         email
     })
-    const createdUser = await User.findById(user._id).select("--password --refreshToken");
+    const createdUser = await User.findById(newUser._id).select("-password -refreshToken");
     if(!createdUser){
         throw new ApiError(400,"creation failed")
     }
@@ -46,16 +47,16 @@ const generateAccessandRefreshToken =async function(userid){
 const login = asyncHandler(async function(req,res){
     const {email,password} = req.body
     if(!email||!password){
-        throw new ApiError(400,"all fiels are required")
+        throw new ApiError("all fiels are required")
     }
     const findUser = await User.findOne({email})
     if(!findUser){
-        throw new ApiError(400,"No user found");
+        throw new ApiError("No user found");
         
     }
     const passwordValidity = await findUser.isPasswordMatching(password)
     if(!passwordValidity){
-        throw new ApiError(400,"enter correct password")
+        throw new ApiError("enter correct password")
     }
     const {refreshToken,accessToken} =await generateAccessandRefreshToken(findUser._id)
     findUser.refreshToken = refreshToken
@@ -63,13 +64,13 @@ const login = asyncHandler(async function(req,res){
         httpOnly:true,
         secure:process.env.NODE_ENV === "production",
     }
-    const loggedINUser = await User.findById(findUser._id).select("--password --refreshToken")
+    const loggedINUser = await User.findById(findUser._id).select("-password -refreshToken")
 
     return res
     .status(200)
     .cookie("refreshToken",refreshToken)
     .cookie("accessToken",accessToken)
-    .json(new ApiResponse(200,"loggenin user"))
+    .json(new ApiResponse(200,loggedINUser,"logged in user"))
 })
 
 const logout = asyncHandler(async function(req,res){
@@ -91,12 +92,12 @@ const logout = asyncHandler(async function(req,res){
         .status(200)
         .clearCookie("refreshToken",Opts)
         .clearCookie("accessToken",Opts)
-        .json(ApiResponse(200,"successfully logged out"))
+        .json(new ApiResponse(200,{},"successfully logged out"))
 
 })
 
 const refreshAccesToken = asyncHandler(async function(req,res){
-    clientRefreshToken = req.body.refreshToken || req.cookies.refreshToken;
+    const clientRefreshToken = req.body.refreshToken || req.cookies.refreshToken;
     if(!clientRefreshToken){
         throw new ApiError("please login again")
     }
@@ -120,7 +121,7 @@ const refreshAccesToken = asyncHandler(async function(req,res){
         }
         return res.
         status(200)
-        .cookie("refreshToken",refreshToken.opts)
+        .cookie("refreshToken",refreshToken,opts)
         .cookie("accessToken",accessToken,opts)
         .json(new ApiResponse(200,user, "accessToken refreshed"))
     } catch (error) {
@@ -142,21 +143,20 @@ const changePassword = asyncHandler(async function(req,res){
         .status(200)
         .json(new ApiResponse(200,"password changed"))
     } catch (error) {
-         throw new ApiError(401, error?.message || "Something went wrong")
+         throw new ApiError( error?.message || "Something went wrong")
     }
 })
 
 
 const getCurrentUser = asyncHandler(async function(req,res){
-    return 
-    res
-    .status(200)
-    .json(new ApiResponse(200,req.user,"user fetched successfully"))
+    return res
+        .status(200)
+        .json(new ApiResponse(200,req.user,"user fetched successfully"))
 })
 const updateAccountDetails = asyncHandler(async function(req,res){
     const {email,username} = req.body;
     if(!email || !username){
-        throw new ApiError(400, "all field are required")
+        throw new ApiError("all field are required")
     }
     try {
         const user = await User.findByIdAndUpdate(
