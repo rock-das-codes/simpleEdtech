@@ -1,0 +1,10 @@
+.env
+./eduflow-backend/.env
+./eduflow-frontend/.env
+./eduflow-frontend/.env.local
+./eduflow-frontend/.env.development.local
+./eduflow-frontend/.env.test.local
+./eduflow-frontend/.env.production.local
+*/.env*
+.env
+*/.env.*
