@@ -4,7 +4,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import connectDB from "./config/db.js";
 import router from "./routes/authRoute.js";
-// import courseRoutes from "./routes/courseRoutes.js";
+import courseRoutes from "./routes/courseRoutes.js";
 // import enrollmentRoutes from "./routes/enrollment.js";
 
 dotenv.config();
@@ -38,7 +38,7 @@ app.get("/", (req, res) => {
 
 // 🔹 Register API Routes
 app.use("/api/users", router);
-// app.use("/api/courses", courseRoutes);
+app.use("/api/courses", courseRoutes);
 
 // 🔹 Global Error Handler Middleware
 app.use((err, req, res, next) => {
